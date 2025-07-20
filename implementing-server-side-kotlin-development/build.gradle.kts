@@ -53,6 +53,22 @@ dependencies {
 	detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.21.0")
 }
 
+/**
+ * detektの設定
+ *
+ * 基本的に全て `detekt-override.yml` で設定する
+ */
+detekt {
+	// 略
+	/**
+	 * ./gradlew detektGenerateConfig でdetekt.ymlが生成される(バージョンが上がる度に再生成する)
+	 */
+	config = files(
+		"$projectDir/config/detekt/detekt.yml",
+		"$projectDir/config/detekt/detekt-override.yml",
+	)
+}
+
 kotlin {
 	compilerOptions {
 		freeCompilerArgs.addAll("-Xjsr305=strict")
