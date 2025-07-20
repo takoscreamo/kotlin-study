@@ -19,6 +19,22 @@ plugins {
 	 * KotlinのLinter/Formatter
 	 */
 	id("io.gitlab.arturbosch.detekt") version "1.23.5"
+
+	/**
+	 * dokka
+	 *
+	 * URL
+	 * - https://github.com/Kotlin/dokka
+	 * GradlePlugins(plugins.gradle.org)
+	 * - https://plugins.gradle.org/plugin/org.jetbrains.dokka
+	 * Main用途
+	 * - ドキュメント生成
+	 * Sub用途
+	 * - 特になし
+	 * 概要
+	 * - JDocの代替(=KDoc)
+	 */
+	id("org.jetbrains.dokka") version "1.9.20"
 }
 
 group = "com.example"
@@ -36,7 +52,7 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.1")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
@@ -50,7 +66,14 @@ dependencies {
 	 * - 基本はktlintと同じ
 	 * - format自動適用オプションの autoCorrect が使えるようになる
 	 */
-	detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.21.0")
+	detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.5")
+
+	/**
+	 * dokkaHtmlPlugin
+	 *
+	 * dokka Pluginを適用するのに必要
+	 */
+	dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.9.20")
 }
 
 /**
@@ -63,7 +86,7 @@ detekt {
 	/**
 	 * ./gradlew detektGenerateConfig でdetekt.ymlが生成される(バージョンが上がる度に再生成する)
 	 */
-	config = files(
+	config.from(
 		"$projectDir/config/detekt/detekt.yml",
 		"$projectDir/config/detekt/detekt-override.yml",
 	)
@@ -77,4 +100,17 @@ kotlin {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "com.fasterxml.jackson.core" && requested.name == "jackson-databind") {
+            useVersion("2.13.4")
+            because("Dokkaの依存バージョンに合わせるため")
+        }
+        if (requested.group == "com.fasterxml.jackson.module" && requested.name == "jackson-module-kotlin") {
+            useVersion("2.13.4")
+            because("Dokkaの依存バージョンに合わせるため")
+        }
+    }
 }
