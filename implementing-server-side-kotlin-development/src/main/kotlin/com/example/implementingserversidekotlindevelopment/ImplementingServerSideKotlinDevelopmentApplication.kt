@@ -1,4 +1,4 @@
-package com.example.implementing_server_side_kotlin_development
+package com.example.implementingserversidekotlindevelopment
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -7,5 +7,6 @@ import org.springframework.boot.runApplication
 class ImplementingServerSideKotlinDevelopmentApplication
 
 fun main(args: Array<String>) {
-	runApplication<ImplementingServerSideKotlinDevelopmentApplication>(*args)
+    @Suppress("SpreadOperator") // 追加
+    runApplication<ImplementingServerSideKotlinDevelopmentApplication>(*args)
 }
