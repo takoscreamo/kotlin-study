@@ -149,6 +149,58 @@ dependencies {
 	 * - Validation を実装した際に、本ライブラリがなければ、バリデーションが動作しない
 	 */
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+
+	/**
+	 * Spring JDBC
+	 *
+	 * URL
+	 * - https://spring.pleiades.io/spring-framework/docs/current/javadoc-api/org/springframework/jdbc/core/package-summary.html
+	 * MavenCentral
+	 * - https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc
+	 * Main用途
+	 * - DBへ保存
+	 * 概要
+	 * - 特になし
+	 *
+	 * これを入れるだけで、application.properties/yamlや@ConfigurationによるDB接続設定が必要になる
+	 */
+	implementation("org.springframework.boot:spring-boot-starter-jdbc")
+
+	/**
+	 * postgresql
+	 *
+	 * URL
+	 * - https://jdbc.postgresql.org/
+	 * MavenCentral
+	 * - https://mvnrepository.com/artifact/org.postgresql/postgresql
+	 * Main用途
+	 * - DBつなぐ時のドライバ
+	 * 概要
+	 * - 特になし
+	 */
+	implementation("org.postgresql:postgresql")
+
+	/**
+	 * Database Rider
+	 *
+	 * - Rider Core
+	 * - Rider Spring
+	 * - Rider JUnit 5
+	 *
+	 * URL
+	 * - https://database-rider.github.io/database-rider/
+	 * MavenCentral
+	 * - https://mvnrepository.com/artifact/com.github.database-rider/rider-core
+	 * - https://mvnrepository.com/artifact/com.github.database-rider/rider-spring
+	 * - https://mvnrepository.com/artifact/com.github.database-rider/rider-junit5
+	 * Main用途
+	 * - JUnitでDB周りのテスト時のヘルパー
+	 * 概要
+	 * - テーブルの事前条件、事後条件を簡潔に設定できる
+	 */
+	implementation("com.github.database-rider:rider-core:1.41.0")
+	implementation("com.github.database-rider:rider-spring:1.41.0")
+	testImplementation("com.github.database-rider:rider-junit5:1.41.0")
 }
 
 /**
