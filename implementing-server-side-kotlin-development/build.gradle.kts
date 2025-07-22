@@ -69,6 +69,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.1")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0") // OpenAPI/Swagger依存追加
+	implementation("io.swagger.core.v3:swagger-annotations:2.2.21") // OpenAPIアノテーション用依存追加
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -135,13 +137,6 @@ dependencies {
 	detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.5")
 
 	/**
-	 * dokkaHtmlPlugin
-	 *
-	 * dokka Pluginを適用するのに必要
-	 */
-	dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.9.20")
-
-	/**
 	 * Spring Boot Starter Validation
 	 *
 	 * MavenCentral
@@ -154,14 +149,6 @@ dependencies {
 	 * - Validation を実装した際に、本ライブラリがなければ、バリデーションが動作しない
 	 */
 	implementation("org.springframework.boot:spring-boot-starter-validation")
-
-	/**
-	 * springdoc の gradle 拡張
-	 *
-	 * 概要
-	 * - CLI から springdoc を利用して OpenAPI を 生成する
-	 */
-	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 }
 
 /**
@@ -192,19 +179,5 @@ tasks.withType<Test> {
 
 configurations.all {
     resolutionStrategy.eachDependency {
-        if (requested.group == "com.fasterxml.jackson.core" && requested.name == "jackson-databind") {
-            useVersion("2.13.4")
-            because("Dokkaの依存バージョンに合わせるため")
-        }
-        if (requested.group == "com.fasterxml.jackson.module" && requested.name == "jackson-module-kotlin") {
-            useVersion("2.13.4")
-            because("Dokkaの依存バージョンに合わせるため")
-        }
     }
-}
-
-openApi {
-	apiDocsUrl.set("http://localhost:8080/v3/api-docs.yaml")
-	outputDir.set(project.layout.buildDirectory.dir("springdoc"))
-	outputFileName.set("openapi.yaml")
 }
