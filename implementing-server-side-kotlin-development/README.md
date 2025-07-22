@@ -77,5 +77,24 @@ dependencies {
 ./gradlew build
 ```
 
-## ライセンス
-このリポジトリはMITライセンスです。
+### 静的解析（detekt）
+
+Kotlinコードの静的解析には detekt を利用しています。
+
+#### 全体解析
+```sh
+./gradlew detekt
+```
+
+#### メインソースのみ解析
+```sh
+./gradlew detektMain
+```
+
+#### レポート出力例
+- HTML: `build/reports/detekt/detekt.html`
+- Markdown: `build/reports/detekt/detekt.md`
+- SARIF: `build/reports/detekt/detekt.sarif`
+- XML: `build/reports/detekt/detekt.xml`
+- テキスト: `build/reports/detekt/detekt.txt`
+
