@@ -8,6 +8,19 @@ import org.springframework.boot.runApplication
  *
  */
 @SpringBootApplication
+@OpenAPIDefinition(
+    info = Info(
+        title = "Implementing Server Side Kotlin",
+        version = "0.0",
+        description = "Sample API of Hands On Server Side Kotlin",
+    ),
+    servers = [
+        Server(
+            description = "Local Server",
+            url = "http://localhost:8080",
+        ),
+    ],
+)
 class ImplementingServerSideKotlinDevelopmentApplication
 
 /**

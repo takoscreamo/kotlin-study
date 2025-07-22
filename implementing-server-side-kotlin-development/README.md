@@ -35,35 +35,47 @@ macOSやLinuxの場合、以下のコマンドで直接ブラウザで開くこ�
 open build/dokka/html/index.html
 ```
 
-### 静的解析（Detekt）
-
-Kotlinコードの静的解析にはDetektを利用しています。
-
-#### メインソースの解析
-```sh
-./gradlew detektMain
-```
-レポートは `build/reports/detekt/` 以下に出力されます。
-自動修正を行いたい場合は、以下のコマンドを利用できます。
-```sh
-./gradlew detektMain --auto-correct
-```
-
-#### テストコードの解析
-```sh
-./gradlew detektTest
-```
-自動修正を行いたい場合は、以下のコマンドを利用できます。
-```sh
-./gradlew detektTest --auto-correct
-```
-
 ## ディレクトリ構成
 - `src/main/kotlin` : アプリケーション本体
 - `src/test/kotlin` : テストコード
 - `build.gradle.kts` : ビルド設定
 - `docker/` : Docker関連ファイル
 - `config/` : 静的解析等の設定
+
+## 依存ライブラリ・プラグインの導入方法
+
+### プラグインの追加
+
+`build.gradle.kts` の `plugins` ブロックに追加します。
+
+例：
+```kotlin
+plugins {
+    kotlin("jvm") version "1.9.22"
+    id("org.springframework.boot") version "3.5.3"
+    // 必要なプラグインをここに追加
+}
+```
+
+### 依存ライブラリの追加
+
+`build.gradle.kts` の `dependencies` ブロックに追加します。
+
+例：
+```kotlin
+dependencies {
+    implementation("io.arrow-kt:arrow-core:1.2.1")
+    testImplementation("org.assertj:assertj-core:3.25.2")
+    testImplementation("net.jqwik:jqwik:1.8.2")
+    testImplementation("net.jqwik:jqwik-kotlin:1.8.2")
+}
+```
+
+追加後、以下のコマンドで依存関係やプラグインをダウンロード・反映します。
+
+```sh
+./gradlew build
+```
 
 ## ライセンス
 このリポジトリはMITライセンスです。
