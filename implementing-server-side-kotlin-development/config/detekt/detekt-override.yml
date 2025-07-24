@@ -10,6 +10,7 @@ comments:
   #
   UndocumentedPublicClass:
     active: true  # (default: false)
+    excludes: ['**/test/**']
   #
   # UndocumentedPublicFunction
   #
@@ -18,6 +19,7 @@ comments:
   #
   UndocumentedPublicFunction:
     active: true  # (default: false)
+    excludes: ['**/test/**']
   #
   # UndocumentedPublicProperty
   #
@@ -26,6 +28,7 @@ comments:
   #
   UndocumentedPublicProperty:
     active: true  # (default: false)
+    excludes: ['**/test/**']
 
 # style のルール
 style:
