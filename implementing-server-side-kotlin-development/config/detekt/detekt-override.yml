@@ -74,19 +74,13 @@ style:
     max: 2
     excludeGuardClauses: false
 
-# formatter のルール
+# formatting のルール
 formatting:
   active: true
-  android: false
-  autoCorrect: true
   TrailingCommaOnCallSite:
-    active: true
-    autoCorrect: true
-    useTrailingCommaOnCallSite: true
+    active: false
   TrailingCommaOnDeclarationSite:
-    active: true
-    autoCorrect: true
-    useTrailingCommaOnDeclarationSite: true
+    active: false
   #
   # MaximumLineLength
   # 概要
